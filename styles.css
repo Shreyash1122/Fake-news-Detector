@@ -1,10 +1,15 @@
 :root {
-  --bg: #f4f4f4;
-  --text: #1f1f1f;
-  --panel: #ffffff;
-  --grid: #cfcfcf;
-  --snake: #1f7a3b;
-  --food: #c93e2d;
+  --bg: #07111f;
+  --bg-accent: #0d1b30;
+  --text: #eff6ff;
+  --muted: #9cb3cf;
+  --panel: rgba(6, 19, 37, 0.82);
+  --panel-border: rgba(147, 197, 253, 0.2);
+  --grid: rgba(96, 165, 250, 0.12);
+  --snake: linear-gradient(135deg, #34d399, #10b981);
+  --food: linear-gradient(135deg, #fb7185, #f97316);
+  --button: rgba(14, 36, 68, 0.92);
+  --button-hover: rgba(24, 58, 104, 0.92);
 }
 
 * {
@@ -13,31 +18,107 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: var(--bg);
+  min-height: 100vh;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 28%),
+    linear-gradient(180deg, var(--bg-accent), var(--bg));
   color: var(--text);
 }
 
 .app {
   max-width: 520px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 24px 16px 40px;
+}
+
+.hero {
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #38bdf8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  line-height: 0.95;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  max-width: 42ch;
+  color: var(--muted);
 }
 
 .hud {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.hud h1 {
+.stat-card,
+.difficulty-picker,
+.status,
+.controls,
+.actions,
+.tips {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(4, 11, 24, 0.28);
+}
+
+.stat-card {
+  padding: 14px 16px;
+}
+
+.stat-card p,
+.difficulty-picker {
   margin: 0;
+}
+
+.stat-card p {
   font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.difficulty-picker {
+  display: block;
+  padding: 12px 14px;
+}
+
+.difficulty-picker select {
+  width: 100%;
+  border: 1px solid rgba(147, 197, 253, 0.25);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+  background: rgba(7, 17, 31, 0.95);
 }
 
 .status {
   min-height: 24px;
   margin: 8px 0 12px;
+  padding: 14px 16px;
+  color: #d7e7ff;
 }
 
 .board {
@@ -45,8 +126,14 @@ body {
   grid-template-columns: repeat(20, minmax(0, 1fr));
   width: min(92vw, 460px);
   aspect-ratio: 1 / 1;
-  background: var(--panel);
-  border: 1px solid var(--grid);
+  margin: 0 auto;
+  background:
+    linear-gradient(180deg, rgba(12, 30, 54, 0.8), rgba(7, 17, 31, 0.92)),
+    var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(4, 11, 24, 0.35);
 }
 
 .cell {
@@ -55,29 +142,79 @@ body {
 
 .cell.snake {
   background: var(--snake);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.12);
 }
 
 .cell.food {
   background: var(--food);
+  box-shadow: 0 0 16px rgba(251, 113, 133, 0.45);
 }
 
 .controls {
-  margin-top: 12px;
+  margin-top: 16px;
+  padding: 16px;
+  text-align: center;
 }
 
 .controls button,
 .actions button {
   margin: 4px;
-  min-width: 68px;
-  min-height: 38px;
+  min-width: 84px;
+  min-height: 42px;
+  border: 1px solid rgba(147, 197, 253, 0.22);
+  border-radius: 999px;
+  background: var(--button);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition: background 140ms ease, transform 140ms ease;
+}
+
+.controls button:hover,
+.actions button:hover,
+.controls button:focus-visible,
+.actions button:focus-visible {
+  background: var(--button-hover);
+  transform: translateY(-1px);
 }
 
 .actions {
+  margin-top: 10px;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.tips {
+  margin-top: 12px;
+  padding: 14px 16px;
+  color: var(--muted);
+}
+
+.tips p {
+  margin: 0;
+}
+
+.tips p + p {
   margin-top: 8px;
+}
+
+kbd {
+  border: 1px solid rgba(147, 197, 253, 0.25);
+  border-radius: 8px;
+  padding: 2px 8px;
+  background: rgba(7, 17, 31, 0.95);
+  color: var(--text);
 }
 
 @media (min-width: 760px) {
   .controls {
     max-width: 280px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .hud {
+    grid-template-columns: 1fr;
   }
 }

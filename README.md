@@ -1,76 +1,29 @@
-﻿# AI Fake News Detector (Credibility Checker)
+# Neon Snake Sprint
 
-React + Tailwind frontend and Node/Express backend for analyzing news credibility.
+A polished mini project built at the repo root: a browser-based snake game with a neon arcade theme, selectable speed modes, and persistent local best-score tracking.
 
-## Features Implemented
-- Paste article text/headline, provide URL, or upload screenshot image.
-- AI credibility analysis with verdict:
-  - `Likely Fake`
-  - `Possibly True`
-  - `Verified`
-- Trust score (`0-100`) with breakdown:
-  - Language authenticity
-  - Source reliability
-  - Fact consistency
-- Key claim extraction + explainable summary.
-- Source verification with:
-  - Supporting articles
-  - Contradicting articles
+## Mini Project Features
+- Responsive single-page game UI.
+- Keyboard controls with arrow keys or `WASD`.
+- Three speed presets: `Chill`, `Classic`, and `Turbo`.
+- Pause and resume with the space bar.
+- Best score saved in `localStorage`.
+- Game logic covered by Node tests.
 
-## Project Structure
-- `backend/` Express API + OpenAI + source verification logic
-- `frontend/` React + Tailwind dashboard/chat-style UI
+## Run The Mini Project
+Open `index.html` in a browser, or serve the repository root with any static file server.
 
-## Backend API
-Base URL: `http://localhost:4000/api`
-
-### `POST /analyze`
-Request body:
-```json
-{
-  "text": "optional article text",
-  "url": "optional article url",
-  "imageDataUrl": "optional base64 data URL"
-}
-```
-
-Response includes:
-- `analysis.verdict`
-- `analysis.credibilityScore`
-- `analysis.breakdown`
-- `analysis.keyClaims`
-- `analysis.explanation`
-- `verification.supportingArticles`
-- `verification.contradictingArticles`
-
-## Environment Variables
-Create `backend/.env` from `backend/.env.example`.
-
-Required for full functionality:
-- `OPENAI_API_KEY=...`
-
-Optional:
-- `OPENAI_MODEL=gpt-4.1-mini`
-- `NEWS_API_KEY=...` (for external source verification)
-- `PORT=4000`
-
-## Run
-### 1) Backend
+## Test
 ```bash
-cd backend
-npm install
-npm run dev
+npm test
 ```
 
-### 2) Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
+## Project Files
+- `index.html` contains the game layout.
+- `styles.css` contains the arcade-inspired styling.
+- `src/main.js` wires the UI to the game loop.
+- `src/gameLogic.js` contains the pure game logic.
+- `tests/gameLogic.test.js` verifies movement, collisions, restart logic, and food placement.
 
-Frontend runs at `http://localhost:5173` and calls backend at `http://localhost:4000`.
-
-## Notes
-- If `OPENAI_API_KEY` is missing, backend returns a safe fallback analysis message.
-- If `NEWS_API_KEY` is missing, source verification runs in limited mode.
+## Other Repo Folders
+This repository also includes an unfinished `frontend/` and `backend/` app from an earlier fake-news detector prototype, but the primary completed mini project for this push is `Neon Snake Sprint` at the repository root.

@@ -3,14 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Snake</title>
+    <title>Neon Snake Sprint</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="app">
+      <section class="hero">
+        <p class="eyebrow">Mini Project</p>
+        <h1>Neon Snake Sprint</h1>
+        <p class="subtitle">
+          A fast arcade-style snake game with difficulty modes and local best-score tracking.
+        </p>
+      </section>
+
       <header class="hud">
-        <h1>Snake</h1>
-        <p id="score">Score: 0</p>
+        <div class="stat-card">
+          <span class="label">Score</span>
+          <p id="score">0</p>
+        </div>
+        <div class="stat-card">
+          <span class="label">Best</span>
+          <p id="best-score">0</p>
+        </div>
+        <label class="difficulty-picker" for="difficulty">
+          <span class="label">Speed</span>
+          <select id="difficulty">
+            <option value="chill">Chill</option>
+            <option value="classic" selected>Classic</option>
+            <option value="turbo">Turbo</option>
+          </select>
+        </label>
       </header>
 
       <section id="status" class="status" aria-live="polite">Use arrows or WASD to move.</section>
@@ -33,7 +55,12 @@
 
       <section class="actions">
         <button id="pause" type="button">Pause</button>
-        <button id="restart" type="button">Restart</button>
+        <button id="restart" type="button">Restart Run</button>
+      </section>
+
+      <section class="tips" aria-label="Instructions">
+        <p>Eat the glowing fruit, avoid walls and your own trail.</p>
+        <p>Press <kbd>Space</kbd> to pause. Change speed anytime between runs.</p>
       </section>
     </main>
 
